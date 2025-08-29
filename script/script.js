@@ -87,6 +87,8 @@ clearHistoryBtn.addEventListener("click", function () {
 let copyCount = 0;
 const copyButtons = document.getElementsByClassName("btn");
 
+const copyCountSpan = document.getElementById("copy-count");
+
 for (let copyBtn of copyButtons) {
     copyBtn.addEventListener("click", function () {
         if (this.innerText.includes("Copy")) {
@@ -94,10 +96,12 @@ for (let copyBtn of copyButtons) {
             const serviceName = card.getElementsByClassName("service-name")[0].innerText;
             const serviceNumber = card.getElementsByClassName("service-number")[0].innerText;
 
+            // copy to clipboard
             navigator.clipboard.writeText(serviceNumber);
-            copyCount++;
 
-            alert("Copied " + serviceName + " (" + serviceNumber + ") to clipboard! Total copies: " + copyCount);
+            copyCount++;
+            copyCountSpan.innerText = copyCount;
+            alert("Copied " + serviceName + " (" + serviceNumber + ") to clipboard!");
         }
     });
 }
